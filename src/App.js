@@ -18,12 +18,39 @@ export default function App() {
   });
 
   function handleFormInput(event) {
-    const { name, value } = event.target;
+    const { name, value, type, checked } = event.target;
 
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    //check the type of form input, in this case checkbox
+    if (type === "checkbox") {
+      //update the state to have all previously checked form data
+      setFormData((prevFormData) => {
+        //get the current array, or initiallize a new array if no items have been added
+        const updatedArray = prevFormData[name] ? [...prevFormData[name]] : [];
+
+        if (checked) {
+          //add the value to the array if the class was selected
+          updatedArray.push(value);
+        } else {
+          //removes the value from the array if unchecked.
+          const valueIndex = updatedArray.indexOf(value);
+          if (valueIndex > -1) {
+            updatedArray.splice(value, 1);
+          }
+        }
+        //returns the new updated array with all selections
+        return {
+          ...prevFormData,
+          [name]: updatedArray,
+        };
+      });
+    }
+    //handles all over form inputs, like radio, and number types
+    else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
   }
 
   // useEffect(() => {
@@ -124,6 +151,7 @@ function Prefrences({ formData, handleFormInput }) {
     event.stopPropagation();
   };
 
+  //form data
   return (
     <div className="content-box" onClick={stopProp}>
       <form onSubmit={handleFormSubmit}>
