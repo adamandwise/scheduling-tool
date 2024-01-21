@@ -1,15 +1,158 @@
 import { useEffect, useState } from "react";
 import "./styles.css";
 
-// const classes = [
-//   {
-//     class_name:,
-//     pre_req:,
-//     offered_in_summer:,
-//     is_lab_science:,
-//   }
-// ]
-
+const classes = [
+  {
+    class_name: "Math97",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "ENG101",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "ENG126",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "ENG127",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "ENG128",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "ENG235",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "MATH141",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "MATH147",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "MATH146",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "MATH256",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "CMST210",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "CMST220",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "CMST230",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "CMST238",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: false,
+  },
+  {
+    class_name: "Lab Science",
+    pre_req: null,
+    offered_in_summer: true,
+    is_lab_science: true,
+  },
+  {
+    class_name: "SDEV101",
+    pre_req: null,
+    offered_in_summer: false,
+    is_lab_science: false,
+  },
+  {
+    class_name: "SDEV201",
+    pre_req: null,
+    offered_in_summer: false,
+    is_lab_science: false,
+  },
+  {
+    class_name: "SDEV106",
+    pre_req: "SDEV117",
+    offered_in_summer: false,
+    is_lab_science: false,
+  },
+  {
+    class_name: "CS108",
+    pre_req: "Math97",
+    offered_in_summer: false,
+    is_lab_science: false,
+  },
+  {
+    class_name: "CS109",
+    pre_req: "Math97",
+    offered_in_summer: false,
+    is_lab_science: false,
+  },
+  {
+    class_name: "SDEV121",
+    pre_req: "CS109",
+    offered_in_summer: false,
+    is_lab_science: false,
+  },
+  {
+    class_name: "SDEV218",
+    pre_req: "Math97",
+    offered_in_summer: false,
+    is_lab_science: false,
+  },
+  {
+    class_name: "SDEV219",
+    pre_req: "SDEV218",
+    offered_in_summer: false,
+    is_lab_science: false,
+  },
+  {
+    class_name: "SDEV220",
+    pre_req: "SDEV219",
+    offered_in_summer: false,
+    is_lab_science: false,
+  },
+  {
+    class_name: "SDEV280",
+    pre_req: null,
+    offered_in_summer: false,
+    is_lab_science: false,
+  },
+];
 export default function App() {
   const [formData, setFormData] = useState({
     summerClasses: 0,
