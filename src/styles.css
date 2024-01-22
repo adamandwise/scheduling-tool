@@ -87,16 +87,6 @@ body {
   line-height: 1.6;
 }
 
-.content-box ul {
-  color: #868e96;
-  margin-left: 16px;
-  margin-top: 16px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
 /* OPEN STATE */
 .open {
   border-top: 4px solid #087f5b;
@@ -109,19 +99,34 @@ body {
 
 .quarter-content {
   border: 2px solid rgb(194, 192, 192);
-  width: 45%;
+  width: 45%; /* Adjust the width calculation */
   height: 400px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
   padding: 20px 24px;
-  padding-right: 48px;
+  margin-bottom: 20px; /* Ensure there's space between rows */
 }
 
 .quarter-allign {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
+  justify-content: space-between; /* This should space out the items */
+  align-items: flex-start;
+}
+
+.smorter-smallign {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* This should space out the items */
+  align-items: flex-start;
+}
+
+.content-box ul {
+  color: #868e96;
+  margin-left: 16px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .generate {

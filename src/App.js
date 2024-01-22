@@ -218,6 +218,8 @@ function Header() {
 }
 
 function Form({ formData, handleFormInput }) {
+  const [schedule, setSchedule] = useState([]);
+
   return (
     <div className="accordion">
       <h3 style={{ color: "red" }}>
@@ -226,28 +228,53 @@ function Form({ formData, handleFormInput }) {
       <h3 style={{ color: "green" }}>
         First time students: Please fill in your preferences.
       </h3>
-      <AccordionItem formData={formData} handleFormInput={handleFormInput} />
-      <All4Quarters />
+      <AccordionItem
+        formData={formData}
+        handleFormInput={handleFormInput}
+        onScheduleGenerate={setSchedule}
+      />
+      <All4Quarters schedule={schedule} />
     </div>
   );
 }
 
-function All4Quarters() {
+function All4Quarters({ schedule }) {
+  const getScheduleForSeason = (season) => {
+    const quarter = schedule.find((q) => q.season === season);
+    return quarter ? quarter.schedule : [];
+  };
+
   return (
-    <div className="quarter-allign">
-      <Display season="🍂 Fall Quarter 🍂" />
-      <Display season="❄️ Winter  Quarter ❄️" />
-      <Display season="🌸 Spring  Quarter 🌸" />
-      <Display season="☀️ Summer  Quarter ☀️" />
+    <div className="smorter-smallign">
+      <Display
+        season="🍂 Fall Quarter 🍂"
+        schedule={getScheduleForSeason("🍂 Fall Quarter 🍂")}
+      />
+      <Display
+        season="❄️ Winter  Quarter ❄️"
+        schedule={getScheduleForSeason("❄️ Winter  Quarter ❄️")}
+      />
+      <Display
+        season="🌸 Spring  Quarter 🌸"
+        schedule={getScheduleForSeason("🌸 Spring  Quarter 🌸")}
+      />
+      <Display
+        season="☀️ Summer  Quarter ☀️"
+        schedule={getScheduleForSeason("☀️ Summer  Quarter ☀️")}
+      />
     </div>
   );
 }
 
-function Display({ season }) {
+function Display({ season, schedule }) {
   return (
-    <div className="content-box quarter-content">
-      <h5>{season} </h5>
-      <hr></hr>
+    <div className="content-box quarter-content ">
+      <h5>{season}</h5>
+      <ul>
+        {schedule.map((classItem, index) => (
+          <li key={index}>{classItem.class_name}</li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -260,7 +287,7 @@ function Footer() {
   );
 }
 
-function AccordionItem({ formData, handleFormInput }) {
+function AccordionItem({ formData, handleFormInput, onScheduleGenerate }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleToggle() {
@@ -275,14 +302,18 @@ function AccordionItem({ formData, handleFormInput }) {
 
       {isOpen && (
         <div className="content-box">
-          <Prefrences formData={formData} handleFormInput={handleFormInput} />
+          <Prefrences
+            formData={formData}
+            handleFormInput={handleFormInput}
+            onScheduleGenerate={onScheduleGenerate}
+          />
         </div>
       )}
     </div>
   );
 }
 
-function Prefrences({ formData, handleFormInput }) {
+function Prefrences({ formData, handleFormInput, onScheduleGenerate }) {
   //
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -293,6 +324,32 @@ function Prefrences({ formData, handleFormInput }) {
   const stopProp = (event) => {
     event.stopPropagation();
   };
+
+  const handleButtonClick = () => {
+    const newSchedule = generateSchedule(classes);
+
+    onScheduleGenerate(newSchedule);
+  };
+
+  function generateSchedule() {
+    const schedule = [
+      {
+        season: "🍂 Fall Quarter 🍂",
+        schedule: [classes[0], classes[1], classes[15]],
+      },
+      {
+        season: "❄️ Winter  Quarter ❄️",
+        schedule: [classes[6], classes[3], classes[16]],
+      },
+      {
+        season: "🌸 Spring  Quarter 🌸",
+        schedule: [classes[2], classes[14], classes[10]],
+      },
+      { season: "☀️ Summer  Quarter ☀️", schedule: [classes[4]] },
+    ];
+
+    return schedule;
+  }
 
   //form data
   return (
@@ -658,7 +715,7 @@ function Prefrences({ formData, handleFormInput }) {
 
         <br></br>
         <div className="generate">
-          <button>Generate Schedule</button>
+          <button onClick={handleButtonClick}>Generate Schedule</button>
         </div>
       </form>
     </div>
