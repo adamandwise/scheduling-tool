@@ -269,7 +269,8 @@ function All4Quarters({ schedule }) {
 function Display({ season, schedule }) {
   return (
     <div className="content-box quarter-content ">
-      <h5>{season}</h5>
+      <h5 className="centered">{season}</h5>
+      <hr></hr>
       <ul>
         {schedule.map((classItem, index) => (
           <li key={index}>{classItem.class_name}</li>

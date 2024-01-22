@@ -129,6 +129,10 @@ body {
   gap: 12px;
 }
 
+h5 {
+  text-align: center;
+}
+
 .generate {
   display: flex;
   flex-wrap: wrap;
