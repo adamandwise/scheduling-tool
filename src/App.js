@@ -355,6 +355,16 @@ function Prefrences({ formData, handleFormInput, onScheduleGenerate }) {
       schedule[3].schedule.pop(1);
     }
 
+    if (formData.classesPerQuarter === "1") {
+      schedule[0].schedule.pop(1) && schedule[0].schedule.pop(2);
+      schedule[1].schedule.pop(1) && schedule[1].schedule.pop(2);
+      schedule[2].schedule.pop(1) && schedule[2].schedule.pop(2);
+    } else if (formData.classesPerQuarter === "2") {
+      schedule[0].schedule.pop(2);
+      schedule[1].schedule.pop(2);
+      schedule[2].schedule.pop(2);
+    }
+
     return schedule;
   }
 
