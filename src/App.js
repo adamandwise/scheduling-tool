@@ -327,12 +327,12 @@ function Prefrences({ formData, handleFormInput, onScheduleGenerate }) {
   };
 
   const handleButtonClick = () => {
-    const newSchedule = generateSchedule(classes);
+    const newSchedule = generateSchedule(classes, formData);
 
     onScheduleGenerate(newSchedule);
   };
 
-  function generateSchedule() {
+  function generateSchedule(classes, formData) {
     const schedule = [
       {
         season: "🍂 Fall Quarter 🍂",
@@ -346,8 +346,14 @@ function Prefrences({ formData, handleFormInput, onScheduleGenerate }) {
         season: "🌸 Spring  Quarter 🌸",
         schedule: [classes[2], classes[14], classes[10]],
       },
-      { season: "☀️ Summer  Quarter ☀️", schedule: [classes[4]] },
+      { season: "☀️ Summer  Quarter ☀️", schedule: [classes[4], classes[5]] },
     ];
+
+    if (formData.summerClasses === "0") {
+      schedule[3].schedule = [];
+    } else if (formData.summerClasses === "1") {
+      schedule[3].schedule.pop(1);
+    }
 
     return schedule;
   }
