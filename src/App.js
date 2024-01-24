@@ -154,6 +154,12 @@ const classes = [
   },
 ];
 export default function App() {
+  useEffect(() => {
+    fetch("http://localhost:3001/")
+      .then((response) => response.text())
+      .then((data) => console.log(data));
+  }, []);
+
   const [formData, setFormData] = useState({
     summerClasses: 0,
     classesPerQuarter: 0,
