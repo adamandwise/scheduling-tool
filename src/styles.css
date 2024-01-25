@@ -130,22 +130,34 @@ body {
 }
 
 .table-draw {
-  border: 2px solid rgb(194, 192, 192);
-  width: 45%; /* Adjust the width calculation */
-  height: 400px;
+  border-collapse: collapse;
+  width: 80%; /* Adjust based on your preference */
+  margin: auto; /* Centers the table */
+}
+
+.table-draw th,
+.table-draw td {
+  padding: 8px;
+  text-align: center; /* Center aligns the text */
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-  padding: 20px 24px;
-  margin-bottom: 20px; /* Ensure there's space between rows */
 }
 
 h5 {
   text-align: center;
 }
 
+.progress-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
 .generate {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
 }
 
 button {

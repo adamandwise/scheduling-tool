@@ -155,6 +155,7 @@ const classes = [
 ];
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(false);
   const [schedule, setSchedule] = useState({});
   const [formData, setFormData] = useState({
     summerClasses: 0,
@@ -163,6 +164,8 @@ export default function App() {
   });
 
   const handleButtonClick = async () => {
+    //start the progress bar
+    setIsLoading(true);
     try {
       const response = await fetch("http://localhost:3001/generate-schedule", {
         method: "POST",
@@ -177,6 +180,7 @@ export default function App() {
       console.log("received data: " + data);
 
       setSchedule(data);
+      setIsLoading(false);
     } catch (error) {
       console.log("Error generating schedule:", error);
     }
@@ -234,7 +238,8 @@ export default function App() {
         handleFormInput={handleFormInput}
         onButtonClick={handleButtonClick}
       />
-      <ScheduleTable schedule={schedule} />
+      {isLoading && <ProgressBar />}
+      {schedule && <ScheduleTable schedule={schedule} />}
       <Footer />
     </div>
   );
@@ -302,7 +307,12 @@ function AccordionItem({ formData, handleFormInput, onButtonClick }) {
   );
 }
 
-function Prefrences({ formData, handleFormInput, onButtonClick }) {
+function Prefrences({
+  formData,
+  handleFormInput,
+  onButtonClick,
+  handleToggle,
+}) {
   //
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -677,17 +687,33 @@ function Prefrences({ formData, handleFormInput, onButtonClick }) {
 
         <br></br>
         <div className="generate">
-          <button onClick={onButtonClick}>Generate Schedule</button>
+          <button
+            onClick={() => {
+              onButtonClick();
+              handleToggle();
+            }}
+          >
+            Generate Schedule
+          </button>
         </div>
       </form>
     </div>
   );
 }
 
+// progress bar component showing users that something is happening when the schedule is generated
+function ProgressBar() {
+  return <div className="progress-bar">Creating schedule...</div>;
+}
+
 function ScheduleTable({ schedule }) {
   const scheduleData =
     typeof schedule === "string" ? JSON.parse(schedule) : schedule;
   const scheduleArray = scheduleData.schedule || [];
+
+  if (scheduleArray.length === 0) {
+    return null;
+  }
 
   return (
     <div className="generate">
