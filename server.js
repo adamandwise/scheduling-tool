@@ -1,16 +1,16 @@
 require("dotenv").config();
 
 const OpenAI = require("openai");
-const openai = new OpenAI();
+//open ai api key
+const apiKey = process.env.API_KEY;
+const openai = new OpenAI(apiKey);
 
 const express = require("express");
 const app = express();
 const port = 3001;
 const cors = require("cors");
 app.use(cors());
-
-//open ai api key
-const apiKey = process.env.API_KEY;
+app.use(express.json());
 
 app.post("/generate-schedule", async (req, res) => {
   const { summerClasses, classesPerQuarter, previousClasses } = req.body;
@@ -31,7 +31,7 @@ app.post("/generate-schedule", async (req, res) => {
             You follow a strict naming convention that looks like this, everytime, without fail.  =>
              "schedule": [
               {
-                "quarter": "fall_y1",
+                "quarter": "Fall - Year 1",
                 "classes": [
                   { "class_name": "Math97" },
                   { "class_name": "ENG101" },
@@ -39,7 +39,7 @@ app.post("/generate-schedule", async (req, res) => {
                 ]
               },
               {
-                "quarter": "winter_y1",
+                "quarter": "Winter - Year 2",
                 "classes": [
                   { "class_name": "ENG126" },
                   { "class_name": "CS108", "pre_req": "Math97" },
@@ -101,9 +101,9 @@ app.post("/generate-schedule", async (req, res) => {
 //   res.send("hello world!");
 // });
 
-// app.listen(port, () => {
-//   console.log("Server listening at http://localhost:${port}");
-// });
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
+});
 
 // to run the server
 // npm run server

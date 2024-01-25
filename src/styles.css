@@ -129,6 +129,15 @@ body {
   gap: 12px;
 }
 
+.table-draw {
+  border: 2px solid rgb(194, 192, 192);
+  width: 45%; /* Adjust the width calculation */
+  height: 400px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  padding: 20px 24px;
+  margin-bottom: 20px; /* Ensure there's space between rows */
+}
+
 h5 {
   text-align: center;
 }

@@ -155,10 +155,10 @@ const classes = [
 ];
 
 export default function App() {
-  const [schedule, setSchedule] = useState([]);
+  const [schedule, setSchedule] = useState({});
   const [formData, setFormData] = useState({
     summerClasses: 0,
-    classesPerQuarter: 0,
+    classesPerQuarter: 4,
     previousClasses: [],
   });
 
@@ -171,13 +171,20 @@ export default function App() {
         },
         body: JSON.stringify(formData),
       });
+      //catching the response from OpenAI
       const data = await response.json();
-      //update state with recieved schedule
+      //logging the data
+      console.log("received data: " + data);
+
       setSchedule(data);
     } catch (error) {
       console.log("Error generating schedule:", error);
     }
   };
+
+  useEffect(() => {
+    console.log("checking schedule every time its updated =>" + schedule);
+  }, [schedule]);
 
   function handleFormInput(event) {
     const { name, value, type, checked } = event.target;
@@ -287,6 +294,7 @@ function AccordionItem({ formData, handleFormInput, onButtonClick }) {
             formData={formData}
             handleFormInput={handleFormInput}
             onButtonClick={onButtonClick}
+            handleToggle={handleToggle}
           />
         </div>
       )}
@@ -362,9 +370,8 @@ function Prefrences({ formData, handleFormInput, onButtonClick }) {
         >
           <option value={1}>1</option>
           <option value={2}>2</option>
-          <option value={3} selected>
-            3
-          </option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
         </select>
         <br />
         <br />
@@ -670,7 +677,7 @@ function Prefrences({ formData, handleFormInput, onButtonClick }) {
 
         <br></br>
         <div className="generate">
-          <button onButtonClick={onButtonClick}>Generate Schedule</button>
+          <button onClick={onButtonClick}>Generate Schedule</button>
         </div>
       </form>
     </div>
@@ -678,22 +685,30 @@ function Prefrences({ formData, handleFormInput, onButtonClick }) {
 }
 
 function ScheduleTable({ schedule }) {
+  const scheduleData =
+    typeof schedule === "string" ? JSON.parse(schedule) : schedule;
+  const scheduleArray = scheduleData.schedule || [];
+
   return (
-    <table className="content-box">
-      <thead>
-        <tr>
-          <th>Quarter</th>
-          <th>Classes</th>
-        </tr>
-      </thead>
-      <tbody>
-        {schedule.map((quarter, index) => (
-          <tr key={index}>
-            <td>{quarter.quarter}</td>
-            <td>{quarter.classes.map((c) => c.class_name).join(", ")}</td>
+    <div className="generate">
+      <table className="table-draw">
+        <thead className="centered">
+          <tr className="">
+            <th>Quarter</th>
+            <th>Classes</th>
+            <hr></hr>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody className="centered">
+          {scheduleArray.map((quarter, index) => (
+            <tr key={index}>
+              <td>{quarter.quarter}</td>
+              <td>{quarter.classes.map((c) => c.class_name).join(", ")}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
