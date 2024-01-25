@@ -153,18 +153,31 @@ const classes = [
     is_lab_science: false,
   },
 ];
-export default function App() {
-  useEffect(() => {
-    fetch("http://localhost:3001/")
-      .then((response) => response.text())
-      .then((data) => console.log(data));
-  }, []);
 
+export default function App() {
+  const [schedule, setSchedule] = useState([]);
   const [formData, setFormData] = useState({
     summerClasses: 0,
     classesPerQuarter: 0,
     previousClasses: [],
   });
+
+  const handleButtonClick = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/generate-schedule", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      //update state with recieved schedule
+      setSchedule(data);
+    } catch (error) {
+      console.log("Error generating schedule:", error);
+    }
+  };
 
   function handleFormInput(event) {
     const { name, value, type, checked } = event.target;
@@ -209,7 +222,12 @@ export default function App() {
   return (
     <div className="app">
       <Header />
-      <Form formData={formData} handleFormInput={handleFormInput} />
+      <Form
+        formData={formData}
+        handleFormInput={handleFormInput}
+        onButtonClick={handleButtonClick}
+      />
+      <ScheduleTable schedule={schedule} />
       <Footer />
     </div>
   );
@@ -223,9 +241,8 @@ function Header() {
   );
 }
 
-function Form({ formData, handleFormInput }) {
-  const [schedule, setSchedule] = useState([]);
-
+function Form({ formData, handleFormInput, onButtonClick }) {
+  //<All4Quarters schedule={schedule} />
   return (
     <div className="accordion">
       <h3 style={{ color: "red" }}>
@@ -237,51 +254,8 @@ function Form({ formData, handleFormInput }) {
       <AccordionItem
         formData={formData}
         handleFormInput={handleFormInput}
-        onScheduleGenerate={setSchedule}
+        onButtonClick={onButtonClick}
       />
-      <All4Quarters schedule={schedule} />
-    </div>
-  );
-}
-
-function All4Quarters({ schedule }) {
-  const getScheduleForSeason = (season) => {
-    const quarter = schedule.find((q) => q.season === season);
-    return quarter ? quarter.schedule : [];
-  };
-
-  return (
-    <div className="smorter-smallign">
-      <Display
-        season="🍂 Fall Quarter 🍂"
-        schedule={getScheduleForSeason("🍂 Fall Quarter 🍂")}
-      />
-      <Display
-        season="❄️ Winter  Quarter ❄️"
-        schedule={getScheduleForSeason("❄️ Winter  Quarter ❄️")}
-      />
-      <Display
-        season="🌸 Spring  Quarter 🌸"
-        schedule={getScheduleForSeason("🌸 Spring  Quarter 🌸")}
-      />
-      <Display
-        season="☀️ Summer  Quarter ☀️"
-        schedule={getScheduleForSeason("☀️ Summer  Quarter ☀️")}
-      />
-    </div>
-  );
-}
-
-function Display({ season, schedule }) {
-  return (
-    <div className="content-box quarter-content ">
-      <h5 className="centered">{season}</h5>
-      <hr></hr>
-      <ul>
-        {schedule.map((classItem, index) => (
-          <li key={index}>{classItem.class_name}</li>
-        ))}
-      </ul>
     </div>
   );
 }
@@ -294,7 +268,7 @@ function Footer() {
   );
 }
 
-function AccordionItem({ formData, handleFormInput, onScheduleGenerate }) {
+function AccordionItem({ formData, handleFormInput, onButtonClick }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleToggle() {
@@ -312,7 +286,7 @@ function AccordionItem({ formData, handleFormInput, onScheduleGenerate }) {
           <Prefrences
             formData={formData}
             handleFormInput={handleFormInput}
-            onScheduleGenerate={onScheduleGenerate}
+            onButtonClick={onButtonClick}
           />
         </div>
       )}
@@ -320,7 +294,7 @@ function AccordionItem({ formData, handleFormInput, onScheduleGenerate }) {
   );
 }
 
-function Prefrences({ formData, handleFormInput, onScheduleGenerate }) {
+function Prefrences({ formData, handleFormInput, onButtonClick }) {
   //
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -331,48 +305,6 @@ function Prefrences({ formData, handleFormInput, onScheduleGenerate }) {
   const stopProp = (event) => {
     event.stopPropagation();
   };
-
-  const handleButtonClick = () => {
-    const newSchedule = generateSchedule(classes, formData);
-
-    onScheduleGenerate(newSchedule);
-  };
-
-  function generateSchedule(classes, formData) {
-    const schedule = [
-      {
-        season: "🍂 Fall Quarter 🍂",
-        schedule: [classes[0], classes[1], classes[15]],
-      },
-      {
-        season: "❄️ Winter  Quarter ❄️",
-        schedule: [classes[6], classes[3], classes[16]],
-      },
-      {
-        season: "🌸 Spring  Quarter 🌸",
-        schedule: [classes[2], classes[14], classes[10]],
-      },
-      { season: "☀️ Summer  Quarter ☀️", schedule: [classes[4], classes[5]] },
-    ];
-
-    if (formData.summerClasses === "0") {
-      schedule[3].schedule = [];
-    } else if (formData.summerClasses === "1") {
-      schedule[3].schedule.pop(1);
-    }
-
-    if (formData.classesPerQuarter === "1") {
-      schedule[0].schedule.pop(1) && schedule[0].schedule.pop(2);
-      schedule[1].schedule.pop(1) && schedule[1].schedule.pop(2);
-      schedule[2].schedule.pop(1) && schedule[2].schedule.pop(2);
-    } else if (formData.classesPerQuarter === "2") {
-      schedule[0].schedule.pop(2);
-      schedule[1].schedule.pop(2);
-      schedule[2].schedule.pop(2);
-    }
-
-    return schedule;
-  }
 
   //form data
   return (
@@ -738,9 +670,30 @@ function Prefrences({ formData, handleFormInput, onScheduleGenerate }) {
 
         <br></br>
         <div className="generate">
-          <button onClick={handleButtonClick}>Generate Schedule</button>
+          <button onButtonClick={onButtonClick}>Generate Schedule</button>
         </div>
       </form>
     </div>
+  );
+}
+
+function ScheduleTable({ schedule }) {
+  return (
+    <table className="content-box">
+      <thead>
+        <tr>
+          <th>Quarter</th>
+          <th>Classes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {schedule.map((quarter, index) => (
+          <tr key={index}>
+            <td>{quarter.quarter}</td>
+            <td>{quarter.classes.map((c) => c.class_name).join(", ")}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
