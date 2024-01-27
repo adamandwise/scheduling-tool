@@ -146,11 +146,20 @@ h5 {
   text-align: center;
 }
 
-.progress-bar {
+.progress-bar-center {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+}
+
+.progress-bar {
+  transition: opacity 1s ease-out;
+}
+
+.timer-text {
+  padding-left: 10px;
+  transition: visibility 0.3s linear;
 }
 
 .generate {
@@ -158,6 +167,20 @@ h5 {
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.letter {
+  animation: fade 0.4s infinite;
+  display: inline-block;
 }
 
 button {

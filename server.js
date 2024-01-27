@@ -78,7 +78,7 @@ app.post("/generate-schedule", async (req, res) => {
           content: userPrompt,
         },
       ],
-      model: "gpt-4-1106-preview",
+      model: "gpt-4-turbo-preview",
       response_format: { type: "json_object" },
     });
 

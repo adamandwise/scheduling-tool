@@ -672,16 +672,6 @@ function Prefrences({
         <label className="text-set" htmlFor="sdev220">
           SDEV 220
         </label>
-        <input
-          type="checkbox"
-          id="sdev280"
-          name="previousClasses"
-          onChange={handleFormInput}
-          defaultValue="sdev280"
-        />
-        <label className="text-set" htmlFor="sdev280">
-          SDEV 280
-        </label>
         <br />
         <hr></hr>
 
@@ -703,7 +693,28 @@ function Prefrences({
 
 // progress bar component showing users that something is happening when the schedule is generated
 function ProgressBar() {
-  return <div className="progress-bar">Creating schedule...</div>;
+  const text =
+    ".. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. ..";
+  const letters = text.split("");
+
+  return (
+    <div className="progress-bar-center">
+      <p className="progress-bar-center">
+        Please wait while your schedule is generated
+      </p>
+      {letters.map((letter, index) => (
+        <span
+          key={index}
+          className="letter"
+          style={{ animationDelay: `${index * 0.15}s` }}
+        >
+          {letter === " " ? " " : letter}
+          {""}
+          {/* Replace space with Unicode non-breaking space */}
+        </span>
+      ))}
+    </div>
+  );
 }
 
 function ScheduleTable({ schedule }) {
@@ -735,6 +746,7 @@ function ScheduleTable({ schedule }) {
           ))}
         </tbody>
       </table>
+      <br></br>
     </div>
   );
 }
