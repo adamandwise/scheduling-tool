@@ -35,9 +35,6 @@ body {
   padding: 2.4rem 0;
 }
 
-.form {
-}
-
 .accordion {
   width: 700px;
   margin: 100px auto;
@@ -130,9 +127,8 @@ body {
 }
 
 .table-draw {
-  border-collapse: collapse;
-  width: 80%; /* Adjust based on your preference */
-  margin: auto; /* Centers the table */
+  width: 50%;
+  margin-bottom: 50px;
 }
 
 .table-draw th,
