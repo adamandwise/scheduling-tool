@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./styles.css";
+import Header from "./Header";
 
 const classes = [
   {
@@ -241,14 +242,6 @@ export default function App() {
       {isLoading && <ProgressBar />}
       {schedule && <ScheduleTable schedule={schedule} />}
       <Footer />
-    </div>
-  );
-}
-
-function Header() {
-  return (
-    <div className="header">
-      <h3>🐊 GRC SDEV Scheduling Tool 🐊</h3>
     </div>
   );
 }
