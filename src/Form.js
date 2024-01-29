@@ -1,4 +1,4 @@
-import AccordionItem from "./AccordianItem";
+import AccordionItem from "./AccordionItem";
 
 function Form({ formData, handleFormInput, onButtonClick }) {
   //<All4Quarters schedule={schedule} />

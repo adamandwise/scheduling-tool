@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./styles.css";
 import Header from "./Header";
 import Form from "./Form";
+import Footer from "./Footer";
 
 const classes = [
   {
@@ -243,14 +244,6 @@ export default function App() {
       {isLoading && <ProgressBar />}
       {schedule && <ScheduleTable schedule={schedule} />}
       <Footer />
-    </div>
-  );
-}
-
-function Footer() {
-  return (
-    <div className="header">
-      <h3>🐊 🐊</h3>
     </div>
   );
 }

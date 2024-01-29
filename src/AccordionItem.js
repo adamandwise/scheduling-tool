@@ -1,4 +1,4 @@
-import Prefrences from "./Prefrences";
+import Prefrences from "./Preferences";
 import React, { useState } from "react";
 
 function AccordionItem({ formData, handleFormInput, onButtonClick }) {
