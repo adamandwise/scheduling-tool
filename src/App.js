@@ -1,3 +1,17 @@
+/**
+ * Author: Adam Wise
+ * Date: 1/30/2024
+ *
+ * This is the main App component of my GRC SDEV Schedule Tool Web Application.
+ * The purpose of our application is to allow students and advisors to enter a few preferences and have a tailored school schedule designed around
+ * what the student is looking for. We use a simple intake form to submit these preferences, and then we send it over as a prompt to OpenAI's chatGPT API to
+ * workout a schedule.
+ * From here we import useEffect and useState from react as we use these techniques to track state and pass props,
+ * as well as do a little debugging.
+ * We import all of the components we will be using, which includes Header, Form, Footer  ProgressBar amd ScheduleTable, as well as our style sheet.
+ * The main App component handles a request to and a response from OpenAI, as we call thier API to send over student class preferences.
+ */
+
 import { useEffect, useState } from "react";
 import "./styles.css";
 import Header from "./Header";
@@ -5,159 +19,6 @@ import Form from "./Form";
 import Footer from "./Footer";
 import ProgressBar from "./ProgressBar";
 import ScheduleTable from "./SceduleTable";
-
-const classes = [
-  {
-    class_name: "Math97",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "ENG101",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "ENG126",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "ENG127",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "ENG128",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "ENG235",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "MATH141",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "MATH147",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "MATH146",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "MATH256",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "CMST210",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "CMST220",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "CMST230",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "CMST238",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: false,
-  },
-  {
-    class_name: "Lab Science",
-    pre_req: null,
-    offered_in_summer: true,
-    is_lab_science: true,
-  },
-  {
-    class_name: "SDEV101",
-    pre_req: null,
-    offered_in_summer: false,
-    is_lab_science: false,
-  },
-  {
-    class_name: "SDEV201",
-    pre_req: null,
-    offered_in_summer: false,
-    is_lab_science: false,
-  },
-  {
-    class_name: "SDEV106",
-    pre_req: "SDEV117",
-    offered_in_summer: false,
-    is_lab_science: false,
-  },
-  {
-    class_name: "CS108",
-    pre_req: "Math97",
-    offered_in_summer: false,
-    is_lab_science: false,
-  },
-  {
-    class_name: "CS109",
-    pre_req: "Math97",
-    offered_in_summer: false,
-    is_lab_science: false,
-  },
-  {
-    class_name: "SDEV121",
-    pre_req: "CS109",
-    offered_in_summer: false,
-    is_lab_science: false,
-  },
-  {
-    class_name: "SDEV218",
-    pre_req: "Math97",
-    offered_in_summer: false,
-    is_lab_science: false,
-  },
-  {
-    class_name: "SDEV219",
-    pre_req: "SDEV218",
-    offered_in_summer: false,
-    is_lab_science: false,
-  },
-  {
-    class_name: "SDEV220",
-    pre_req: "SDEV219",
-    offered_in_summer: false,
-    is_lab_science: false,
-  },
-  {
-    class_name: "SDEV280",
-    pre_req: null,
-    offered_in_summer: false,
-    is_lab_science: false,
-  },
-];
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -168,6 +29,9 @@ export default function App() {
     previousClasses: [],
   });
 
+  // this function dictates what happens when the user submits the generate schedule button.
+  // we call an endpoint on our own server that makes a Request to openAI's API. We then take this response and pass it into the schedule state for later use. We also
+  //set the state for isLoading, which will call our progressbar component to signify to our users that the api is being called and ChatGpt is receiving our prompt.
   const handleButtonClick = async () => {
     //start the progress bar
     setIsLoading(true);
@@ -191,10 +55,17 @@ export default function App() {
     }
   };
 
-  useEffect(() => {
-    console.log("checking schedule every time its updated =>" + schedule);
-  }, [schedule]);
+  // This bit of code was used when debugging issues related to the data types being passed around - its no longer needed as that issue has been resolved, im keeping it for reference
+  // useEffect(() => {
+  //   console.log("checking schedule every time its updated =>" + schedule);
+  // }, [schedule]);
 
+  /**
+   * This function is passed around as a prop to my form component, as it is used to set the formData which we use to pass to chatGPT in our prompt.
+   * Each time the user makes an edit in the form, this piece of state is updated in real time. The tricky part here is updating the array of checkboxes, which
+   * makes up the bulk of the function.
+   * @param {*} event
+   */
   function handleFormInput(event) {
     const { name, value, type, checked } = event.target;
 
@@ -222,7 +93,7 @@ export default function App() {
         };
       });
     }
-    //handles all over form inputs, like radio, and number types
+    //handles all other form inputs, like radio, and number types
     else {
       setFormData((prevFormData) => ({
         ...prevFormData,
@@ -230,10 +101,6 @@ export default function App() {
       }));
     }
   }
-
-  // useEffect(() => {
-  //   console.log(formData);
-  // }, [formData]);
 
   return (
     <div className="app">
