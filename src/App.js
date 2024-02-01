@@ -19,13 +19,14 @@ import Form from "./Form";
 import Footer from "./Footer";
 import ProgressBar from "./ProgressBar";
 import ScheduleTable from "./SceduleTable";
+import ModeToggle from "./ModeToggle";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [schedule, setSchedule] = useState({});
   const [formData, setFormData] = useState({
     summerClasses: 0,
-    classesPerQuarter: 4,
+    classesPerQuarter: 1,
     previousClasses: [],
   });
 
@@ -63,7 +64,11 @@ export default function App() {
   /**
    * This function is passed around as a prop to my form component, as it is used to set the formData which we use to pass to chatGPT in our prompt.
    * Each time the user makes an edit in the form, this piece of state is updated in real time. The tricky part here is updating the array of checkboxes, which
-   * makes up the bulk of the function.
+   * makes up the bulk of the function. We check for the type to make sure its either a checkbox or anything else really.
+   * in both cases we update the state of form data to include all previously updated input values.
+   * If we are dealing with check boxes, we instantiate a new array and  push the value checked onto it, which would be a string with a class name. we also remove the value from the
+   * array if the user unchecks the box. we then return prevFromData with the updatedArray value. The other input types are more straight forward, and we just asign the value assocaited with the name to the
+   * prevForData array. When the user createsa new schedule, the old value is simple replaced with the new one, so we dont need to account for any other activity.
    * @param {*} event
    */
   function handleFormInput(event) {
@@ -105,6 +110,7 @@ export default function App() {
   return (
     <div className="app">
       <Header />
+      <ModeToggle />
       <Form
         formData={formData}
         handleFormInput={handleFormInput}

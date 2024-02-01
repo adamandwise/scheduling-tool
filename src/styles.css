@@ -147,6 +147,7 @@ h5 {
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+  margin-bottom: 50px;
 }
 
 .progress-bar {
@@ -163,6 +164,13 @@ h5 {
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+}
+
+.toggle-switch {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 50px;
 }
 
 @keyframes fade {

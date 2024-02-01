@@ -52,150 +52,175 @@ app.post("/generate-schedule", async (req, res) => {
     pre_req: null,
     offered_in_summer: true,
     priority: "high",
+    required:"true"
   },
   {
     class_name: "ENG101",
     pre_req: null,
     offered_in_summer: true,
     priority: "high",
+    required:"true"
   },
   {
     class_name: "ENG126",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "ENG127",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "ENG128",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "ENG235",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "MATH141",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "MATH147",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "MATH146",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "MATH256",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "CMST210",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "CMST220",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "CMST230",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "CMST238",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "Lab Science",
     pre_req: null,
     offered_in_summer: true,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "SDEV101",
     pre_req: null,
     offered_in_summer: false,
     priority: "high",
+    required:"true"
   },
   {
     class_name: "SDEV201",
     pre_req: null,
     offered_in_summer: false,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "SDEV106",
     pre_req: null,
     offered_in_summer: false,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "CS108",
     pre_req: "Math97",
     offered_in_summer: false,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "CS109",
     pre_req: "Math97",
     offered_in_summer: false,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "SDEV121",
     pre_req: "CS109",
     offered_in_summer: false,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "SDEV218",
     pre_req: "Math97",
     offered_in_summer: false,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "SDEV219",
     pre_req: "SDEV218",
     offered_in_summer: false,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "SDEV220",
     pre_req: "SDEV219",
     offered_in_summer: false,
-    priority: "low",
+    priority: null,
+    required:"true"
   },
   {
     class_name: "SDEV280",
     pre_req: null,
     offered_in_summer: false,
     priority: "always_last_quarter",
+    required:"true"
   },
 ]; `,
         },
@@ -232,10 +257,10 @@ app.listen(port, () => {
 });
 
 // to run the server
-// npm run server
+//  ****npm run server****
 // or npm server
 //
 //to run the app
-//npm start
+//***npm start***
 //
 // CTRL + C to restart the server

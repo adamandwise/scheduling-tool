@@ -14,7 +14,6 @@ function ScheduleTable({ schedule }) {
           <tr className="">
             <th>Quarter</th>
             <th>Classes</th>
-            <hr></hr>
           </tr>
         </thead>
 

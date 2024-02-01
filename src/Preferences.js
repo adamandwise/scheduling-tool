@@ -1,3 +1,5 @@
+import React, { useEffect } from "react";
+
 function Prefrences({
   formData,
   handleFormInput,
@@ -15,6 +17,18 @@ function Prefrences({
     event.stopPropagation();
   };
 
+  useEffect(() => {
+    console.log("Component did mount");
+
+    // This function runs when the component is about to unmount
+    return () => {
+      console.log("Component will unmount");
+    };
+  }, []); // The empty array means this effect runs once after the initial render
+
+  useEffect(() => {
+    console.log(formData);
+  });
   //form data
   return (
     <div className="content-box" onClick={stopProp}>
@@ -27,7 +41,7 @@ function Prefrences({
           type="radio"
           id="zero"
           name="summerClasses"
-          value="0"
+          value={0}
           checked={formData.summerClasses === "0"}
           onChange={handleFormInput}
         />
@@ -39,7 +53,7 @@ function Prefrences({
           type="radio"
           id="one"
           name="summerClasses"
-          value="1"
+          value={1}
           checked={formData.summerClasses === "1"}
           onChange={handleFormInput}
         />
@@ -51,7 +65,7 @@ function Prefrences({
           type="radio"
           id="two"
           name="summerClasses"
-          value="2"
+          value={2}
           checked={formData.summerClasses === "2"}
           onChange={handleFormInput}
         />
