@@ -33,7 +33,7 @@ export default function App() {
   const [isAdvisor, setIsAdvisor] = useState(false);
 
   const handleAdvisorToggle = (val) => {
-    setIsAdvisor(val);
+    setIsAdvisor((prevIsAdvisor) => !prevIsAdvisor);
   };
 
   // this function dictates what happens when the user submits the generate schedule button.
@@ -118,13 +118,13 @@ export default function App() {
       <Header />
       <ModeToggle handleAdvisorToggle={handleAdvisorToggle} />
       {isAdvisor ? (
+        <Login />
+      ) : (
         <Form
           formData={formData}
           handleFormInput={handleFormInput}
           onButtonClick={handleButtonClick}
         />
-      ) : (
-        <Login />
       )}
       ;{isLoading && <ProgressBar />}
       {schedule && <ScheduleTable schedule={schedule} />}
