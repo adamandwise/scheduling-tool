@@ -1,0 +1,59 @@
+USE master
+GO
+
+/****** Object:  Database AP     ******/
+IF DB_ID('Classes') IS NOT NULL
+	DROP DATABASE Classes
+GO
+
+CREATE DATABASE Classes
+GO 
+
+USE Classes
+GO
+
+/****** Object:  Table class  ******/ 
+/****** classid, classname, quarterOffered, prereq, priority, required ******/
+CREATE TABLE ClassSchedule(
+	ClassID int IDENTITY(1,1) NOT NULL  PRIMARY KEY,
+	ClassName   varchar(50)  NOT NULL,
+	prereq     varchar(15)       NOT NULL,
+	quarterOffered      varchar(15)       NOT NULL,
+	priority      varchar(50)       NOT NULL,
+	required     varchar(15)       NOT NULL	
+)
+GO
+/**** Table: [ClassSchedule] Values ****/
+SET IDENTITY_INSERT ClassSchedule ON 
+INSERT INTO ClassSchedule (ClassID, ClassName, prereq, quarterOffered, priority, required)
+VALUES 
+('1', 'Math97', NULL, 'Flexible', 'high', 'true'),
+('2', 'ENG101', NULL, 'Flexible', 'high', 'true'),
+('3', 'ENG126', NULL, 'Flexible', NULL, 'true'),
+('4', 'ENG127', NULL, 'Flexible', NULL, 'true'),
+('5', 'ENG128', NULL, 'Flexible', NULL, 'true'),
+('6', 'ENG235', NULL, 'Flexible', NULL, 'true'),
+('7', 'MATH141', NULL, 'Flexible', NULL, 'true'),
+('8', 'MATH147', NULL, 'Flexible', NULL, 'true'),
+('9', 'MATH146', NULL, 'Flexible', NULL, 'true'),
+('10', 'MATH256', NULL, 'Flexible', NULL, 'true'),
+('11', 'CMST210', NULL, 'Flexible', NULL, 'true'),
+('12', 'CMST220', NULL, 'Flexible', NULL, 'true'),
+('13', 'CMST230', NULL, 'Flexible', NULL, 'true'),
+('14', 'CMST238', NULL, 'Flexible', NULL, 'true'),
+('15', 'Lab Science', NULL, 'Flexible', NULL, 'true'),
+('16', 'SDEV101', NULL, NULL, 'high', 'true'),
+('17', 'SDEV201', NULL, NULL, NULL, 'true'),
+('18', 'SDEV106', NULL, NULL, NULL, 'true'),
+('19', 'CS108', 'Math97', NULL, NULL, 'true'),
+('20', 'CS109', 'Math97', NULL, NULL, 'true'),
+('21', 'SDEV121', 'CS109, Math97', NULL, NULL, 'true'),
+('22', 'SDEV218', 'Math97', NULL, NULL, 'true'),
+('23', 'SDEV219', 'SDEV218, Math97', NULL, NULL, 'true'),
+('24', 'SDEV220', 'SDEV219, SDEV218, Math97', NULL, NULL, 'true'),
+('25', 'SDEV280', NULL, NULL, 'always last quarter', 'true');
+SET IDENTITY_INSERT Description OFF
+
+
+
+
