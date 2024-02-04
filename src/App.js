@@ -20,6 +20,7 @@ import Footer from "./Footer";
 import ProgressBar from "./ProgressBar";
 import ScheduleTable from "./SceduleTable";
 import ModeToggle from "./ModeToggle";
+import Login from "./Login";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,6 +30,11 @@ export default function App() {
     classesPerQuarter: 1,
     previousClasses: [],
   });
+  const [isAdvisor, setIsAdvisor] = useState(false);
+
+  const handleAdvisorToggle = (val) => {
+    setIsAdvisor(val);
+  };
 
   // this function dictates what happens when the user submits the generate schedule button.
   // we call an endpoint on our own server that makes a Request to openAI's API. We then take this response and pass it into the schedule state for later use. We also
@@ -110,13 +116,17 @@ export default function App() {
   return (
     <div className="app">
       <Header />
-      <ModeToggle />
-      <Form
-        formData={formData}
-        handleFormInput={handleFormInput}
-        onButtonClick={handleButtonClick}
-      />
-      {isLoading && <ProgressBar />}
+      <ModeToggle handleAdvisorToggle={handleAdvisorToggle} />
+      {isAdvisor ? (
+        <Form
+          formData={formData}
+          handleFormInput={handleFormInput}
+          onButtonClick={handleButtonClick}
+        />
+      ) : (
+        <Login />
+      )}
+      ;{isLoading && <ProgressBar />}
       {schedule && <ScheduleTable schedule={schedule} />}
       <Footer />
     </div>

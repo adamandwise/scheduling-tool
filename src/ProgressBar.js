@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 // progress bar component showing users that something is happening when the schedule is generated
 function ProgressBar() {
   const text =

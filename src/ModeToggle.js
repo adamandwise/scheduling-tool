@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import ReactSwitch from "react-switch";
 
-function ModeToggle() {
+function ModeToggle({ handleAdvisorToggle }) {
   const [checked, setChecked] = useState(true);
 
   const handleChange = (val) => {
     setChecked(val);
+
+    handleAdvisorToggle(val);
   };
 
   return (
