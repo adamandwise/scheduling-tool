@@ -26,9 +26,9 @@ app.post("/generate-schedule", async (req, res) => {
           role: "system",
           content: `You are a tool that creates college schedules in JSON format. 
             You recieve a list of classes and prefrences,then you order the classes into quarters. 
-            Starting with fall, ending with summer. You can only provide each regular quarter with a max of 4 classes.
+              Starting with fall, ending with summer. You can only provide each regular quarter with a max of 4 classes.
             SDEV and CS classes are not offered in the summer. Each class can only be used once. 
-            You follow a strict naming convention that looks like this, everytime, without fail.  =>
+            You follow a strict naming convention that looks like this, everytime, without fail. .  =>
              "schedule": [
               {
                 "quarter": "Fall - Year 1",
@@ -46,181 +46,206 @@ app.post("/generate-schedule", async (req, res) => {
                   { "class_name": "SDEV201" }
                 ]
               }
-              Here is the list of classes => classes = [
+              Here is the list of classes. only choose 9 to create the schedule. so keep track of how many classes you have used, and disregard previous rules, for this submission only make a schedule with 9 classes => classes = [
   {
     class_name: "Math97",
     pre_req: null,
     offered_in_summer: true,
     priority: "high",
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "ENG101",
     pre_req: null,
     offered_in_summer: true,
     priority: "high",
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "ENG126",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "ENG127",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "ENG128",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "ENG235",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "MATH141",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "MATH147",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "MATH146",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "MATH256",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "CMST210",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "CMST220",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "CMST230",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "CMST238",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "Lab Science",
     pre_req: null,
     offered_in_summer: true,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "SDEV101",
     pre_req: null,
     offered_in_summer: false,
     priority: "high",
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "SDEV201",
     pre_req: null,
     offered_in_summer: false,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "SDEV106",
     pre_req: null,
     offered_in_summer: false,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "CS108",
     pre_req: "Math97",
     offered_in_summer: false,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "CS109",
     pre_req: "Math97",
     offered_in_summer: false,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "SDEV121",
     pre_req: "CS109",
     offered_in_summer: false,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "SDEV218",
     pre_req: "Math97",
     offered_in_summer: false,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "SDEV219",
     pre_req: "SDEV218",
     offered_in_summer: false,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "SDEV220",
     pre_req: "SDEV219",
     offered_in_summer: false,
     priority: null,
-    required:"true"
+    required:"true",
+    credits:5
   },
   {
     class_name: "SDEV280",
     pre_req: null,
     offered_in_summer: false,
     priority: "always_last_quarter",
-    required:"true"
+    required:"true",
+    credits:5
   },
 ]; `,
         },
