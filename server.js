@@ -33,7 +33,7 @@ app.post("/generate-schedule", async (req, res) => {
               {
                 "quarter": "Fall - Year 1",
                 "classes": [
-                  { "class_name": "Math97" },
+                  { "class_name": "MATH97" },
                   { "class_name": "ENG101" },
                   { "class_name": "SDEV101" }
                 ]
@@ -42,13 +42,13 @@ app.post("/generate-schedule", async (req, res) => {
                 "quarter": "Winter - Year 2",
                 "classes": [
                   { "class_name": "ENG126" },
-                  { "class_name": "CS108", "pre_req": "Math97" },
+                  { "class_name": "CS108", "pre_req": "MATH97" },
                   { "class_name": "SDEV201" }
                 ]
               }
-              Here is the list of classes. only choose 9 to create the schedule. so keep track of how many classes you have used, and disregard previous rules, for this submission only make a schedule with 9 classes => classes = [
+              Here is the list of classes. only choose 18 to create the schedule. so keep track of how many classes you have used, and disregard previous rules, for this submission only make a schedule with 18 classes => classes = [
   {
-    class_name: "Math97",
+    class_name: "MATH97",
     pre_req: null,
     offered_in_summer: true,
     priority: "high",

@@ -21,6 +21,7 @@ import ProgressBar from "./ProgressBar";
 import ScheduleTable from "./SceduleTable";
 import ModeToggle from "./ModeToggle";
 import Login from "./Login";
+import ScheduleDisplay from "./ScheduleDisplay/ScheduleDisplay";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -126,8 +127,8 @@ export default function App() {
           onButtonClick={handleButtonClick}
         />
       )}
-      ;{isLoading && <ProgressBar />}
-      {schedule && <ScheduleTable schedule={schedule} />}
+      {isLoading && <ProgressBar />}
+      {schedule && <ScheduleDisplay schedule={schedule} />}
       <Footer />
     </div>
   );
