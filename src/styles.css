@@ -294,3 +294,53 @@ button:hover {
 .class-display {
   margin: 5px;
 }
+
+.degree-select {
+  font-size: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1200px;
+}
+
+.degree-select-styles {
+  font-size: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.quarter-offered-fieldset {
+  font-size: 30px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.quarter-offered-fieldset-options {
+  margin-right: 10px;
+  border-radius: 5px;
+  display: block;
+}
+
+.label-styles {
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #076313;
+}
+
+.generate-advisor-form {
+  margin-top: 50px;
+  padding: 50px;
+  border: 1px solid #076313;
+  border-radius: 5px;
+  box-shadow: 5px 8px 16px rgba(15, 14, 14, 0.2);
+  margin-bottom: 20px;
+}

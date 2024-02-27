@@ -22,6 +22,7 @@ import ScheduleTable from "./SceduleTable";
 import ModeToggle from "./ModeToggle";
 import Login from "./Login";
 import ScheduleDisplay from "./ScheduleDisplay/ScheduleDisplay";
+import AdvisorForm from "./AdvisorForm";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -119,7 +120,10 @@ export default function App() {
       <Header />
       <ModeToggle handleAdvisorToggle={handleAdvisorToggle} />
       {isAdvisor ? (
-        <Login />
+        <div>
+          {/*<Login />*/}
+          <AdvisorForm />
+        </div>
       ) : (
         <Form
           formData={formData}
